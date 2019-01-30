@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Header = ({ tagline }) => (
   <header className="top">
