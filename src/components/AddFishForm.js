@@ -1,7 +1,6 @@
 import React from 'react';
 
 class AddFishForm extends React.Component {
-  // ref={(input) => this.fishForm = input} 
   nameRef = React.createRef();
   priceRef = React.createRef();
   statusRef = React.createRef();
@@ -18,7 +17,8 @@ class AddFishForm extends React.Component {
       image: this.imageRef.current.value,
     }
     this.props.addFish(fish);
-    this.fishForm.reset();
+    // refresh the form
+    event.currentTarget.reset();
   }
 
   render() {
@@ -36,10 +36,10 @@ class AddFishForm extends React.Component {
           <option value="unavailable">Sold Out!</option>
         </select>
 
-        <textarea name="desc" ref={this.desc} placeholder="Desc" />
+        <textarea name="desc" ref={this.descRef} placeholder="Desc" />
         <input 
           name="image" 
-          ref={this.image} 
+          ref={this.imageRef} 
           type="text" 
           placeholder="Image" />
         <button type="submit">+ Add Fish</button>
