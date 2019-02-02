@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Header from "./Header";
 import Order from "./Order";
 import Inventory from "./Inventory";
@@ -10,6 +11,10 @@ class App extends React.Component {
   state = {
     fishes: {},
     order: {}
+  };
+
+  static propTypes = {
+    match: PropTypes.object
   };
 
   componentDidMount() {
@@ -30,8 +35,8 @@ class App extends React.Component {
     localStorage.setItem(
       this.props.match.params.storeId,
       JSON.stringify(this.state.order)
-      )
-    }
+    );
+  }
 
   componentWillUnmount() {
     base.removeBinding(this.ref);
@@ -44,7 +49,7 @@ class App extends React.Component {
     fishes[`fish${Date.now()}`] = fish;
     // 3. Set the new fishes object to state
     this.setState({ fishes });
-  }
+  };
 
   updateFish = (key, updatedFish) => {
     // 1. Take a copy of the current state
@@ -53,7 +58,7 @@ class App extends React.Component {
     fishes[key] = updatedFish;
     // 3. Set that to state
     this.setState({ fishes });
-  }
+  };
 
   deleteFish = key => {
     // 1. take a copy of state
@@ -62,29 +67,29 @@ class App extends React.Component {
     fishes[key] = null;
     // 3. update state
     this.setState({ fishes });
-  }
+  };
 
   loadSampleFishes = () => {
-    this.setState({ fishes: sampleFishes })
-  }
+    this.setState({ fishes: sampleFishes });
+  };
 
   addToOrder = key => {
     // 1. take a copy of state
-    const order = { ...this.state.order }
+    const order = { ...this.state.order };
     // 2. Either add to the order, or update the number in our order
     order[key] = order[key] + 1 || 1;
     // 3. Call setState to update our state object
     this.setState({ order });
-  }
+  };
 
   removeFromOrder = key => {
-    // 1. take a copy of the state
+    // 1. take a copy of state
     const order = { ...this.state.order };
-    // 2. remote that item from the order
+    // 2. remove that item from order
     delete order[key];
-    // 3. update state
+    // 3. call setState to update or state object
     this.setState({ order });
-  }
+  };
 
   render() {
     return (
@@ -113,6 +118,7 @@ class App extends React.Component {
           deleteFish={this.deleteFish}
           loadSampleFishes={this.loadSampleFishes}
           fishes={this.state.fishes}
+          storeId={this.props.match.params.storeId}
         />
       </div>
     );
