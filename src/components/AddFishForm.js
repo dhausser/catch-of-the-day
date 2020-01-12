@@ -1,12 +1,12 @@
-import React, { createRef } from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 
 function AddFishForm({ addFish }) {
-  const nameRef = createRef();
-  const priceRef = createRef();
-  const statusRef = createRef();
-  const descRef = createRef();
-  const imageRef = createRef();
+  const nameRef = useRef();
+  const priceRef = useRef();
+  const statusRef = useRef();
+  const descRef = useRef();
+  const imageRef = useRef();
 
   const createFish = (event) => {
     // 1.  stop the form from submitting
