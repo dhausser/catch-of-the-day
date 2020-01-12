@@ -34,7 +34,7 @@ function App({ match: { params: { storeId } } }) {
     return () => {
       base.removeBinding(refContainer.current);
     };
-  }, [storeId, order])
+  }, [storeId, fishes, order])
 
   const addFish = (fish) => {
     // 1. Take a copy of the existing state
