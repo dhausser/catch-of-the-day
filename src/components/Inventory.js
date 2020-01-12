@@ -44,13 +44,6 @@ function Inventory({ storeId, fishes, setFishes, updateFish, deleteFish, loadSam
 
   const authenticate = (provider) => {
     const authProvider = new firebase.auth[`${provider}AuthProvider`]();
-
-    // if (provider === 'facebook') {
-    //   FB.getLoginStatus(function (response) {
-    //     statusChangeCallback(response);
-    //   });
-    // }
-
     firebaseApp
       .auth()
       .signInWithPopup(authProvider)
