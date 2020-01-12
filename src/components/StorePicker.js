@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { getFunName } from "../helpers";
 
 function StorePicker({ history }) {
-  myInput = useRef();
+  const myInput = useRef();
 
-  goToStore = event => {
+  const goToStore = (event) => {
     // 1. Stop the form from submitting
     event.preventDefault();
     // 2. get the text from that input

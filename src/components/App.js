@@ -16,25 +16,30 @@ function App({ match: { params: { storeId } } }) {
     // first reinstate our localStorage
     const localStorageRef = localStorage.getItem(storeId);
     if (localStorageRef) {
-      setOrder({ order: JSON.parse(localStorageRef) });
+      setOrder(JSON.parse(localStorageRef));
     }
 
-    refContainer.current = base.syncState(`${storeId}/fishes`, {
+    let ref = refContainer.current;
+    ref = base.syncState(`${storeId}/fishes`, {
       context: {
-        setState: ({ fishes }) => setFishes({ ...fishes }),
+        setState: ({ fishes }) => setFishes(fishes),
         state: { fishes },
       },
       state: "fishes"
     });
 
-    localStorage.setItem(
-      storeId,
-      JSON.stringify(order)
-    );
+    /**
+     * TODO
+     */
+    // localStorage.setItem(
+    //   storeId,
+    //   JSON.stringify(order)
+    // );
+
     return () => {
-      base.removeBinding(refContainer.current);
+      base.removeBinding(ref);
     };
-  }, [storeId, fishes, order])
+  }, [storeId])
 
   const addFish = (fish) => {
     // 1. Take a copy of the existing state
@@ -42,7 +47,7 @@ function App({ match: { params: { storeId } } }) {
     // 2. Add our new fish to that fishes variable
     fishesCopy[`fish${Date.now()}`] = fish;
     // 3. Set the new fishes object to state
-    setFishes({ fishesCopy });
+    setFishes(fishesCopy);
   };
 
   const updateFish = (key, updatedFish) => {
@@ -51,7 +56,7 @@ function App({ match: { params: { storeId } } }) {
     // 2. Update that state
     fishesCopy[key] = updatedFish;
     // 3. Set that to state
-    setFishes({ fishesCopy });
+    setFishes(fishesCopy);
   };
 
   const deleteFish = (key) => {
@@ -60,12 +65,10 @@ function App({ match: { params: { storeId } } }) {
     // 2. update the state
     fishesCopy[key] = null;
     // 3. update state
-    setFishes({ fishesCopy });
+    setFishes(fishesCopy);
   };
 
-  const loadSampleFishes = () => {
-    setFishes({ fishes: sampleFishes });
-  };
+  const loadSampleFishes = () => setFishes(sampleFishes);
 
   const addToOrder = (key) => {
     // 1. take a copy of state
@@ -73,7 +76,7 @@ function App({ match: { params: { storeId } } }) {
     // 2. Either add to the order, or update the number in our order
     orderCopy[key] = order[key] + 1 || 1;
     // 3. Call setState to update our state object
-    setOrder({ orderCopy });
+    setOrder(orderCopy);
   };
 
   const removeFromOrder = (key) => {
@@ -82,7 +85,7 @@ function App({ match: { params: { storeId } } }) {
     // 2. remove that item from order
     delete orderCopy[key];
     // 3. call setState to update or state object
-    setOrder({ orderCopy });
+    setOrder(orderCopy);
   };
 
   return (
@@ -111,6 +114,7 @@ function App({ match: { params: { storeId } } }) {
         deleteFish={deleteFish}
         loadSampleFishes={loadSampleFishes}
         fishes={fishes}
+        setFishes={setFishes}
         storeId={storeId}
       />
     </div>
@@ -118,7 +122,7 @@ function App({ match: { params: { storeId } } }) {
 }
 
 App.propTypes = {
-  storeId: PropTypes.string.isRequired
+  storeId: PropTypes.string
 };
 
 export default App;

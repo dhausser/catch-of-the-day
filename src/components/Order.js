@@ -13,6 +13,7 @@ function Order({ fishes, order, removeFromOrder }) {
       key,
       timeout: { enter: 500, exit: 500 }
     };
+
     // Make sure the fish is loaded before we continue!
     if (!fish) return null;
 
@@ -35,14 +36,14 @@ function Order({ fishes, order, removeFromOrder }) {
                 key={count}
                 timeout={{ enter: 500, exit: 500 }}
               >
-                <span>{count}</span>
+                <span key={count}>{count}</span>
               </CSSTransition>
             </TransitionGroup>
             lbs {fish.name}
+          </span>
+          <span className="price">
             {formatPrice(count * fish.price)}
-            <button onClick={() => removeFromOrder(key)}>
-              &times;
-          </button>
+            <button onClick={() => removeFromOrder(key)}>&times;</button>
           </span>
         </li>
       </CSSTransition>
@@ -65,11 +66,11 @@ function Order({ fishes, order, removeFromOrder }) {
       <h2>Order</h2>
       <TransitionGroup component="ul" className="order">
         {orderIds.map(renderOrder)}
+        <div className="total">
+          Total:
+          <strong>{formatPrice(total)}</strong>
+        </div>
       </TransitionGroup>
-      <div className="total">
-        Total:
-        <strong>{formatPrice(total)}</strong>
-      </div>
     </div>
   );
 }
