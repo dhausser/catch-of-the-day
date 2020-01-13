@@ -19,6 +19,7 @@ function Order({ fishes, order, removeFromOrder }) {
 
     if (!isAvailable) {
       return (
+        // eslint-disable-next-line react/jsx-props-no-spreading
         <CSSTransition {...transitionOptions}>
           <li key={key}>
             Sorry
@@ -31,6 +32,7 @@ is no longer available
       );
     }
     return (
+      // eslint-disable-next-line react/jsx-props-no-spreading
       <CSSTransition {...transitionOptions}>
         <li key={key}>
           <span>
@@ -49,7 +51,7 @@ is no longer available
           </span>
           <span className="price">
             {formatPrice(count * fish.price)}
-            <button onClick={() => removeFromOrder(key)}>&times;</button>
+            <button type="button" onClick={() => removeFromOrder(key)}>&times;</button>
           </span>
         </li>
       </CSSTransition>
@@ -82,9 +84,9 @@ is no longer available
 }
 
 Order.propTypes = {
-  fishes: PropTypes.object,
-  order: PropTypes.object,
-  removeFromOrder: PropTypes.func,
+  fishes: PropTypes.objectOf.isRequired,
+  order: PropTypes.objectOf.isRequired,
+  removeFromOrder: PropTypes.func.isRequired,
 };
 
 export default Order;

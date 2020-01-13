@@ -16,6 +16,7 @@ function Fish({ details, addToOrder, index }) {
       </h3>
       <p>{desc}</p>
       <button
+        type="button"
         disabled={!isAvailable}
         onClick={() => addToOrder(index)}
       >
@@ -32,9 +33,9 @@ Fish.propTypes = {
     desc: PropTypes.string,
     status: PropTypes.string,
     price: PropTypes.number,
-  }),
-  addToOrder: PropTypes.func,
-  index: PropTypes.string,
+  }).isRequired,
+  addToOrder: PropTypes.func.isRequired,
+  index: PropTypes.string.isRequired,
 };
 
 export default Fish;

@@ -13,13 +13,15 @@ function Inventory({
   const [owner, setOwner] = useState(null);
 
   /**
-   * TO FIX: REBASE: The options argument must contain a data property of type ANY. Instead, got undefined
+   * TO FIX: REBASE:
+   * The options argument must contain a data property of type ANY.
+   * Instead, got undefined
    */
   const authHandler = async (authData) => {
     // 1. Look up the current store in the firebase database
     const store = await base.fetch(storeId, {
       context: {
-        setState: ({ fishes }) => setFishes({ ...fishes }),
+        setState: ({ fishes: fishesCopy }) => setFishes({ ...fishesCopy }),
         state: { fishes },
       },
     });
@@ -71,7 +73,7 @@ function Inventory({
     return (
       <div>
         <p>Sorry you are not the owner!</p>
-        <button onClick={logout}>Log Out!</button>
+        <button type="button" onClick={logout}>Log Out!</button>
       </div>
     );
   }
@@ -79,7 +81,7 @@ function Inventory({
   return (
     <div className="inventory">
       <h2>Inventory</h2>
-      <button onClick={logout}>
+      <button type="button" onClick={logout}>
         Log Out!
       </button>
       {Object.keys(fishes).map((key) => (
@@ -92,7 +94,7 @@ function Inventory({
         />
       ))}
       <AddFishForm addFish={addFish} />
-      <button onClick={loadSampleFishes}>
+      <button type="button" onClick={loadSampleFishes}>
         Load Sample Fishes
       </button>
     </div>
@@ -100,13 +102,13 @@ function Inventory({
 }
 
 Inventory.propTypes = {
-  storeId: PropTypes.string,
-  fishes: PropTypes.object,
-  setFishes: PropTypes.func,
-  updateFish: PropTypes.func,
-  deleteFish: PropTypes.func,
-  loadSampleFishes: PropTypes.func,
-  addFish: PropTypes.func,
+  storeId: PropTypes.string.isRequired,
+  fishes: PropTypes.objectOf.isRequired,
+  setFishes: PropTypes.func.isRequired,
+  updateFish: PropTypes.func.isRequired,
+  deleteFish: PropTypes.func.isRequired,
+  loadSampleFishes: PropTypes.func.isRequired,
+  addFish: PropTypes.func.isRequired,
 };
 
 export default Inventory;

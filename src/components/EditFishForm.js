@@ -51,7 +51,7 @@ function EditFishForm({
         onChange={handleChange}
         value={fish.image}
       />
-      <button onClick={() => deleteFish(index)}>
+      <button type="submit" onClick={() => deleteFish(index)}>
         Remove Fish
       </button>
     </div>
@@ -65,10 +65,10 @@ EditFishForm.propTypes = {
     desc: PropTypes.string,
     status: PropTypes.string,
     price: PropTypes.number,
-  }),
-  index: PropTypes.string,
-  updateFish: PropTypes.func,
-  deleteFish: PropTypes.func,
+  }).isRequired,
+  index: PropTypes.string.isRequired,
+  updateFish: PropTypes.func.isRequired,
+  deleteFish: PropTypes.func.isRequired,
 };
 
 export default EditFishForm;
