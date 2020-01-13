@@ -10,6 +10,9 @@ function Inventory({ storeId, fishes, setFishes, updateFish, deleteFish, loadSam
   const [uid, setUid] = useState(null);
   const [owner, setOwner] = useState(null);
 
+  /**
+   * TO FIX: REBASE: The options argument must contain a data property of type ANY. Instead, got undefined
+   */
   const authHandler = async (authData) => {
     // 1. Look up the current store in the firebase database
     const store = await base.fetch(storeId, {
