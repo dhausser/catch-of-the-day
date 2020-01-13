@@ -1,10 +1,8 @@
 {
-  "name": "cotd",
-  "version": "0.0.3",
-  "private": true,
-  "devDependencies": {
-    "react-scripts": "^3.3.0"
-  },
+  "name": "catch-of-the-day",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "dependencies": {
     "autoprefixer-stylus": "^1.0.0",
     "firebase": "^7.6.2",
@@ -16,6 +14,9 @@
     "react-transition-group": "^4.3.0",
     "stylus": "^0.54.7"
   },
+  "devDependencies": {
+    "react-scripts": "^3.3.0"
+  },
   "scripts": {
     "dev": "react-scripts start",
     "start": "react-scripts start",
@@ -26,9 +27,26 @@
     "now-build": "npm run build && mv build dist",
     "styles:watch": "npm run styles -- -w"
   },
-  "browserslist": [
-    ">0.2%",
-    "not ie   <= 11",
-    "not op_mini all"
-  ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhausser/catch-of-the-day.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dhausser/catch-of-the-day/issues"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
