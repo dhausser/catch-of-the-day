@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import firebase from "firebase";
-import AddFishForm from "./AddFishForm";
-import EditFishForm from "./EditFishForm";
-import Login from "./Login";
-import base, { firebaseApp } from "../init-firebase";
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import firebase from 'firebase';
+import AddFishForm from './AddFishForm';
+import EditFishForm from './EditFishForm';
+import Login from './Login';
+import base, { firebaseApp } from '../init-firebase';
 
-function Inventory({ storeId, fishes, setFishes, updateFish, deleteFish, loadSampleFishes, addFish }) {
+function Inventory({
+  storeId, fishes, setFishes, updateFish, deleteFish, loadSampleFishes, addFish,
+}) {
   const [uid, setUid] = useState(null);
   const [owner, setOwner] = useState(null);
 
@@ -25,7 +27,7 @@ function Inventory({ storeId, fishes, setFishes, updateFish, deleteFish, loadSam
     if (!store.owner) {
       // save it as our own
       await base.post(`${storeId}/owner`, {
-        data: authData.uid
+        data: authData.uid,
       });
     }
     // 3. Set the state of the inventory component to reflect the current user
@@ -38,11 +40,11 @@ function Inventory({ storeId, fishes, setFishes, updateFish, deleteFish, loadSam
   // ... component that utilizes this hook to re-render with the ...
   // ... latest auth object.
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         authHandler(user);
       }
-    })
+    });
   });
 
   const authenticate = (provider) => {
@@ -51,13 +53,13 @@ function Inventory({ storeId, fishes, setFishes, updateFish, deleteFish, loadSam
       .auth()
       .signInWithPopup(authProvider)
       .then(authHandler);
-  }
+  };
 
   const logout = async () => {
-    console.log("Logging out!");
+    console.log('Logging out!');
     await firebase.auth().signOut();
     setUid(null);
-  }
+  };
 
   // 1. Check if they are logged in
   if (!uid) {
@@ -80,7 +82,7 @@ function Inventory({ storeId, fishes, setFishes, updateFish, deleteFish, loadSam
       <button onClick={logout}>
         Log Out!
       </button>
-      {Object.keys(fishes).map(key => (
+      {Object.keys(fishes).map((key) => (
         <EditFishForm
           key={key}
           index={key}
@@ -100,10 +102,11 @@ function Inventory({ storeId, fishes, setFishes, updateFish, deleteFish, loadSam
 Inventory.propTypes = {
   storeId: PropTypes.string,
   fishes: PropTypes.object,
+  setFishes: PropTypes.func,
   updateFish: PropTypes.func,
   deleteFish: PropTypes.func,
   loadSampleFishes: PropTypes.func,
-  addFish: PropTypes.func
+  addFish: PropTypes.func,
 };
 
 export default Inventory;
