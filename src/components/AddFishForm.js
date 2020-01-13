@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import PropTypes from "prop-types";
+import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 
 function AddFishForm({ addFish }) {
   const nameRef = useRef();
@@ -16,7 +16,7 @@ function AddFishForm({ addFish }) {
       price: parseFloat(priceRef.current.value),
       status: statusRef.current.value,
       desc: descRef.current.value,
-      image: imageRef.current.value
+      image: imageRef.current.value,
     };
     addFish(fish);
     // refresh the form
@@ -50,7 +50,7 @@ function AddFishForm({ addFish }) {
 }
 
 AddFishForm.propTypes = {
-  addFish: PropTypes.func
+  addFish: PropTypes.func.isRequired,
 };
 
 export default AddFishForm;

@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import PropTypes from "prop-types";
-import Header from "./Header";
-import Order from "./Order";
-import Inventory from "./Inventory";
-import sampleFishes from "../sample-fishes";
-import Fish from "./Fish";
-import base from "../init-firebase";
+import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
+import Header from './Header';
+import Order from './Order';
+import Inventory from './Inventory';
+import sampleFishes from '../sample-fishes';
+import Fish from './Fish';
+import base from '../init-firebase';
 
 function App({ match: { params: { storeId } } }) {
   const [fishes, setFishes] = useState({});
@@ -22,10 +22,10 @@ function App({ match: { params: { storeId } } }) {
     let ref = refContainer.current;
     ref = base.syncState(`${storeId}/fishes`, {
       context: {
-        setState: ({ fishes }) => setFishes(fishes),
+        setState: ({ fishes: fishesCopy }) => setFishes(fishesCopy),
         state: { fishes },
       },
-      state: "fishes"
+      state: 'fishes',
     });
 
     /**
@@ -39,7 +39,7 @@ function App({ match: { params: { storeId } } }) {
     return () => {
       base.removeBinding(ref);
     };
-  }, [storeId])
+  }, [fishes, storeId]);
 
   const addFish = (fish) => {
     // 1. Take a copy of the existing state
@@ -93,7 +93,7 @@ function App({ match: { params: { storeId } } }) {
       <div className="menu">
         <Header tagline="Fresh Seafood Market" />
         <ul className="fishes">
-          {Object.keys(fishes).map(key => (
+          {Object.keys(fishes).map((key) => (
             <Fish
               key={key}
               index={key}
@@ -122,7 +122,9 @@ function App({ match: { params: { storeId } } }) {
 }
 
 App.propTypes = {
-  storeId: PropTypes.string
+  match: PropTypes.objectOf.isRequired,
+  params: PropTypes.objectOf.isRequired,
+  storeId: PropTypes.string.isRequired,
 };
 
 export default App;

@@ -1,17 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { formatPrice } from "../helpers";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { formatPrice } from '../helpers';
 
 function Order({ fishes, order, removeFromOrder }) {
   const renderOrder = (key) => {
     const fish = fishes[key];
     const count = order[key];
-    const isAvailable = fish && fish.status === "available";
+    const isAvailable = fish && fish.status === 'available';
     const transitionOptions = {
-      classNames: "order",
+      classNames: 'order',
       key,
-      timeout: { enter: 500, exit: 500 }
+      timeout: { enter: 500, exit: 500 },
     };
 
     // Make sure the fish is loaded before we continue!
@@ -21,7 +21,11 @@ function Order({ fishes, order, removeFromOrder }) {
       return (
         <CSSTransition {...transitionOptions}>
           <li key={key}>
-            Sorry {fish ? fish.name : "fish"} is no longer available
+            Sorry
+            {' '}
+            {fish ? fish.name : 'fish'}
+            {' '}
+is no longer available
           </li>
         </CSSTransition>
       );
@@ -39,7 +43,9 @@ function Order({ fishes, order, removeFromOrder }) {
                 <span key={count}>{count}</span>
               </CSSTransition>
             </TransitionGroup>
-            lbs {fish.name}
+            lbs
+            {' '}
+            {fish.name}
           </span>
           <span className="price">
             {formatPrice(count * fish.price)}
@@ -54,7 +60,7 @@ function Order({ fishes, order, removeFromOrder }) {
   const total = orderIds.reduce((prevTotal, key) => {
     const fish = fishes[key];
     const count = order[key];
-    const isAvailable = fish && fish.status === "available";
+    const isAvailable = fish && fish.status === 'available';
     if (isAvailable) {
       return prevTotal + count * fish.price;
     }
@@ -78,7 +84,7 @@ function Order({ fishes, order, removeFromOrder }) {
 Order.propTypes = {
   fishes: PropTypes.object,
   order: PropTypes.object,
-  removeFromOrder: PropTypes.func
+  removeFromOrder: PropTypes.func,
 };
 
 export default Order;

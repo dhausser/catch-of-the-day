@@ -1,7 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-function EditFishForm({ fish, index, updateFish, deleteFish }) {
+function EditFishForm({
+  fish, index, updateFish, deleteFish,
+}) {
   const handleChange = (e) => {
     // update that fish
     // 1. Take a copy of the current fish
@@ -10,7 +12,7 @@ function EditFishForm({ fish, index, updateFish, deleteFish }) {
       [e.currentTarget.name]:
         e.currentTarget.name === 'price'
           ? parseFloat(e.currentTarget.value)
-          : e.currentTarget.value
+          : e.currentTarget.value,
     };
     updateFish(index, updatedFish);
   };
@@ -62,7 +64,7 @@ EditFishForm.propTypes = {
     name: PropTypes.string,
     desc: PropTypes.string,
     status: PropTypes.string,
-    price: PropTypes.number
+    price: PropTypes.number,
   }),
   index: PropTypes.string,
   updateFish: PropTypes.func,

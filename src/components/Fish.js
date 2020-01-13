@@ -1,10 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { formatPrice } from "../helpers";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { formatPrice } from '../helpers';
 
 function Fish({ details, addToOrder, index }) {
-  const { image, name, price, desc, status } = details;
-  const isAvailable = status === "available";
+  const {
+    image, name, price, desc, status,
+  } = details;
+  const isAvailable = status === 'available';
   return (
     <li className="menu-fish">
       <img src={image} alt={name} />
@@ -17,7 +19,7 @@ function Fish({ details, addToOrder, index }) {
         disabled={!isAvailable}
         onClick={() => addToOrder(index)}
       >
-        {isAvailable ? "Add To Order" : "Sold Out!"}
+        {isAvailable ? 'Add To Order' : 'Sold Out!'}
       </button>
     </li>
   );
@@ -29,10 +31,10 @@ Fish.propTypes = {
     name: PropTypes.string,
     desc: PropTypes.string,
     status: PropTypes.string,
-    price: PropTypes.number
+    price: PropTypes.number,
   }),
   addToOrder: PropTypes.func,
-  index: PropTypes.string
+  index: PropTypes.string,
 };
 
 export default Fish;
