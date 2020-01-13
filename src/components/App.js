@@ -39,7 +39,12 @@ function App({ match: { params: { storeId } } }) {
     return () => {
       base.removeBinding(ref);
     };
-  }, [fishes, storeId]);
+
+  /**
+   * TO FIX
+   */
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [storeId]);
 
   const addFish = (fish) => {
     // 1. Take a copy of the existing state
