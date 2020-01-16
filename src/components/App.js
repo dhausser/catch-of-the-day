@@ -39,11 +39,7 @@ function App({ match: { params: { storeId } } }) {
     return () => {
       base.removeBinding(ref);
     };
-
-  /**
-   * TO FIX
-   */
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [storeId]);
 
   const addFish = (fish) => {
@@ -79,7 +75,7 @@ function App({ match: { params: { storeId } } }) {
     // 1. take a copy of state
     const orderCopy = { ...order };
     // 2. Either add to the order, or update the number in our order
-    orderCopy[key] = order[key] + 1 || 1;
+    orderCopy[key] = orderCopy[key] + 1 || 1;
     // 3. Call setState to update our state object
     setOrder(orderCopy);
   };
@@ -127,9 +123,15 @@ function App({ match: { params: { storeId } } }) {
 }
 
 App.propTypes = {
-  match: PropTypes.objectOf.isRequired,
-  params: PropTypes.objectOf.isRequired,
-  storeId: PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      storeId: PropTypes.string.isRequired,
+    }),
+  }),
+};
+
+App.defaultProps = {
+  match: null,
 };
 
 export default App;

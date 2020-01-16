@@ -13,8 +13,7 @@ function Inventory({
   const [owner, setOwner] = useState(null);
 
   /**
-   * TO FIX: REBASE:
-   * The options argument must contain a data property of type ANY.
+   * TO FIX: REBASE: The options argument must contain a data property of type ANY.
    * Instead, got undefined
    */
   const authHandler = async (authData) => {
