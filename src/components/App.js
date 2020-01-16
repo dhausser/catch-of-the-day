@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import PropTypes from "prop-types";
-import Header from "./Header";
-import Order from "./Order";
-import Inventory from "./Inventory";
-import sampleFishes from "../sample-fishes";
-import Fish from "./Fish";
-import base from "../init-firebase";
+import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
+import Header from './Header';
+import Order from './Order';
+import Inventory from './Inventory';
+import sampleFishes from '../sample-fishes';
+import Fish from './Fish';
+import base from '../init-firebase';
 
 function App({ match: { params: { storeId } } }) {
   const [fishes, setFishes] = useState({});
@@ -22,10 +22,10 @@ function App({ match: { params: { storeId } } }) {
     let ref = refContainer.current;
     ref = base.syncState(`${storeId}/fishes`, {
       context: {
-        setState: ({ fishes }) => setFishes(fishes),
+        setState: ({ fishes: fishesCopy }) => setFishes(fishesCopy),
         state: { fishes },
       },
-      state: "fishes"
+      state: 'fishes',
     });
 
     /**
@@ -39,7 +39,8 @@ function App({ match: { params: { storeId } } }) {
     return () => {
       base.removeBinding(ref);
     };
-  }, [storeId])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [storeId]);
 
   const addFish = (fish) => {
     // 1. Take a copy of the existing state
@@ -74,7 +75,7 @@ function App({ match: { params: { storeId } } }) {
     // 1. take a copy of state
     const orderCopy = { ...order };
     // 2. Either add to the order, or update the number in our order
-    orderCopy[key] = order[key] + 1 || 1;
+    orderCopy[key] = orderCopy[key] + 1 || 1;
     // 3. Call setState to update our state object
     setOrder(orderCopy);
   };
@@ -93,7 +94,7 @@ function App({ match: { params: { storeId } } }) {
       <div className="menu">
         <Header tagline="Fresh Seafood Market" />
         <ul className="fishes">
-          {Object.keys(fishes).map(key => (
+          {Object.keys(fishes).map((key) => (
             <Fish
               key={key}
               index={key}
@@ -122,7 +123,15 @@ function App({ match: { params: { storeId } } }) {
 }
 
 App.propTypes = {
-  storeId: PropTypes.string
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      storeId: PropTypes.string.isRequired,
+    }),
+  }),
+};
+
+App.defaultProps = {
+  match: null,
 };
 
 export default App;

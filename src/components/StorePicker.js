@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
-import PropTypes from "prop-types";
-import { getFunName } from "../helpers";
+import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
+import { getFunName } from '../helpers';
 
 function StorePicker({ history }) {
   const myInput = useRef();
@@ -30,7 +30,7 @@ function StorePicker({ history }) {
 }
 
 StorePicker.propTypes = {
-  history: PropTypes.object
+  history: PropTypes.objectOf.isRequired,
 };
 
 export default StorePicker;

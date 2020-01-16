@@ -1,33 +1,36 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { formatPrice } from "../helpers";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { formatPrice } from '../helpers';
 
 function Order({ fishes, order, removeFromOrder }) {
   const renderOrder = (key) => {
     const fish = fishes[key];
     const count = order[key];
-    const isAvailable = fish && fish.status === "available";
-    const transitionOptions = {
-      classNames: "order",
-      key,
-      timeout: { enter: 500, exit: 500 }
-    };
+    const isAvailable = fish && fish.status === 'available';
 
     // Make sure the fish is loaded before we continue!
     if (!fish) return null;
 
     if (!isAvailable) {
       return (
-        <CSSTransition {...transitionOptions}>
+        <CSSTransition
+          classNames="order"
+          key={key}
+          timeout={{ enter: 500, exit: 500 }}
+        >
           <li key={key}>
-            Sorry {fish ? fish.name : "fish"} is no longer available
+            {`Sorry ${fish ? fish.name : 'fish'} is no longer available`}
           </li>
         </CSSTransition>
       );
     }
     return (
-      <CSSTransition {...transitionOptions}>
+      <CSSTransition
+        classNames="order"
+        key={key}
+        timeout={{ enter: 500, exit: 500 }}
+      >
         <li key={key}>
           <span>
             <TransitionGroup component="span" className="count">
@@ -39,11 +42,13 @@ function Order({ fishes, order, removeFromOrder }) {
                 <span key={count}>{count}</span>
               </CSSTransition>
             </TransitionGroup>
-            lbs {fish.name}
+            lbs
+            {' '}
+            {fish.name}
           </span>
           <span className="price">
             {formatPrice(count * fish.price)}
-            <button onClick={() => removeFromOrder(key)}>&times;</button>
+            <button type="button" onClick={() => removeFromOrder(key)}>&times;</button>
           </span>
         </li>
       </CSSTransition>
@@ -54,7 +59,7 @@ function Order({ fishes, order, removeFromOrder }) {
   const total = orderIds.reduce((prevTotal, key) => {
     const fish = fishes[key];
     const count = order[key];
-    const isAvailable = fish && fish.status === "available";
+    const isAvailable = fish && fish.status === 'available';
     if (isAvailable) {
       return prevTotal + count * fish.price;
     }
@@ -76,9 +81,14 @@ function Order({ fishes, order, removeFromOrder }) {
 }
 
 Order.propTypes = {
-  fishes: PropTypes.object,
-  order: PropTypes.object,
-  removeFromOrder: PropTypes.func
+  fishes: PropTypes.objectOf,
+  order: PropTypes.objectOf,
+  removeFromOrder: PropTypes.func.isRequired,
+};
+
+Order.defaultProps = {
+  fishes: [],
+  order: [],
 };
 
 export default Order;

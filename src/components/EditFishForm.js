@@ -1,7 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-function EditFishForm({ fish, index, updateFish, deleteFish }) {
+function EditFishForm({
+  fish, index, updateFish, deleteFish,
+}) {
   const handleChange = (e) => {
     // update that fish
     // 1. Take a copy of the current fish
@@ -10,7 +12,7 @@ function EditFishForm({ fish, index, updateFish, deleteFish }) {
       [e.currentTarget.name]:
         e.currentTarget.name === 'price'
           ? parseFloat(e.currentTarget.value)
-          : e.currentTarget.value
+          : e.currentTarget.value,
     };
     updateFish(index, updatedFish);
   };
@@ -49,7 +51,7 @@ function EditFishForm({ fish, index, updateFish, deleteFish }) {
         onChange={handleChange}
         value={fish.image}
       />
-      <button onClick={() => deleteFish(index)}>
+      <button type="button" onClick={() => deleteFish(index)}>
         Remove Fish
       </button>
     </div>
@@ -58,15 +60,15 @@ function EditFishForm({ fish, index, updateFish, deleteFish }) {
 
 EditFishForm.propTypes = {
   fish: PropTypes.shape({
-    image: PropTypes.string,
-    name: PropTypes.string,
-    desc: PropTypes.string,
-    status: PropTypes.string,
-    price: PropTypes.number
-  }),
-  index: PropTypes.string,
-  updateFish: PropTypes.func,
-  deleteFish: PropTypes.func,
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    desc: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+  }).isRequired,
+  index: PropTypes.string.isRequired,
+  updateFish: PropTypes.func.isRequired,
+  deleteFish: PropTypes.func.isRequired,
 };
 
 export default EditFishForm;

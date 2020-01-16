@@ -1,23 +1,23 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Login = ({ authenticate }) => (
   <nav className="login">
     <h2>Inventory Login</h2>
-    <button className="github" onClick={() => authenticate("Github")}>
+    <button type="button" className="github" onClick={() => authenticate('Github')}>
       Log In With GitHub
     </button>
-    <button className="twitter" onClick={() => authenticate("Twitter")}>
+    <button type="button" className="twitter" onClick={() => authenticate('Twitter')}>
       Log In With Twitter
-      </button>
-    <button className="facebook" onClick={() => authenticate("Facebook")}>
+    </button>
+    <button type="button" className="facebook" onClick={() => authenticate('Facebook')}>
       Log In With Facebook
     </button>
   </nav>
 );
 
 Login.propTypes = {
-  authenticate: PropTypes.func.isRequired
+  authenticate: PropTypes.func.isRequired,
 };
 
 export default Login;
