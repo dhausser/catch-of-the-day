@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { formatPrice } from '../helpers';
 
 function EditFishForm({
   fish, index, updateFish, deleteFish,
@@ -29,7 +30,7 @@ function EditFishForm({
         type="text"
         name="price"
         onChange={handleChange}
-        value={fish.price}
+        value={formatPrice(fish.price)}
       />
       <select
         type="text"

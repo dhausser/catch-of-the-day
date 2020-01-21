@@ -7,7 +7,13 @@ import Login from './Login';
 import base, { firebaseApp } from '../init-firebase';
 
 function Inventory({
-  storeId, fishes, setFishes, updateFish, deleteFish, loadSampleFishes, addFish,
+  storeId,
+  fishes,
+  setFishes,
+  updateFish,
+  deleteFish,
+  loadSampleFishes,
+  addFish,
 }) {
   const [uid, setUid] = useState(null);
   const [owner, setOwner] = useState(null);
@@ -57,7 +63,6 @@ function Inventory({
   };
 
   const logout = async () => {
-    console.log('Logging out!');
     await firebase.auth().signOut();
     setUid(null);
   };
@@ -72,7 +77,9 @@ function Inventory({
     return (
       <div>
         <p>Sorry you are not the owner!</p>
-        <button type="button" onClick={logout}>Log Out!</button>
+        <button type="button" onClick={logout}>
+          Log Out!
+        </button>
       </div>
     );
   }
