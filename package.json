@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "autoprefixer-stylus": "^1.0.0",
-    "firebase": "^7.6.2",
+    "firebase": "^10.9.0",
     "prop-types": "^15.7.2",
     "re-base": "4.0.0",
     "react": "^16.12.0",
